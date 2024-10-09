@@ -2,3 +2,4 @@ transformers
 TensorFlow 
 torch
 tf-keras
+timm
