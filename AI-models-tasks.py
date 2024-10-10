@@ -1,6 +1,10 @@
 import streamlit as st
 from transformers import pipeline
 from PIL import Image
+from transformers import T5Tokenizer, pipeline
+import sentencepiece
+
+
 
 # Set the page config for the app (only once)
 st.set_page_config(page_title="AI models Task ", layout="centered")
@@ -70,7 +74,6 @@ def page_5():
 
 def page_6():
     st.title("Text to Question Generation")
-    from transformers import T5Tokenizer, pipeline
 
     # Load the tokenizer explicitly
     tokenizer = T5Tokenizer.from_pretrained("mrm8488/t5-base-finetuned-question-generation-ap")

@@ -3,3 +3,4 @@ TensorFlow
 torch
 tf-keras
 timm
+sentencepiece
