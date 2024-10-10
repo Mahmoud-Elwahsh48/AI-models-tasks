@@ -70,7 +70,15 @@ def page_5():
 
 def page_6():
     st.title("Text to Question Generation")
-    generator = pipeline(model="mrm8488/t5-base-finetuned-question-generation-ap")
+    from transformers import T5Tokenizer, pipeline
+
+    # Load the tokenizer explicitly
+    tokenizer = T5Tokenizer.from_pretrained("mrm8488/t5-base-finetuned-question-generation-ap")
+
+    # Use the tokenizer with the pipeline
+    generator = pipeline("text2text-generation", model="mrm8488/t5-base-finetuned-question-generation-ap", tokenizer=tokenizer)
+
+    
     user_input = st.text_area("Enter a sentence to generate new question")
     if st.button("Generate"):
         if user_input:
