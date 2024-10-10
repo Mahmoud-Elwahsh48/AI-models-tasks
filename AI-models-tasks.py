@@ -72,22 +72,28 @@ def page_5():
             st.write(classify1)
 
 
+
+
 def page_6():
     st.title("Text to Question Generation")
-
-    # Load the tokenizer explicitly
+    # Load the tokenizer and the model
     tokenizer = T5Tokenizer.from_pretrained("mrm8488/t5-base-finetuned-question-generation-ap")
-
-    # Use the tokenizer with the pipeline
     generator = pipeline("text2text-generation", model="mrm8488/t5-base-finetuned-question-generation-ap", tokenizer=tokenizer)
 
+    user_input = st.text_area("Enter a sentence to generate a question")
     
-    user_input = st.text_area("Enter a sentence to generate new question")
     if st.button("Generate"):
         if user_input:
-            input = generator(user_input)
-            generate1 = f"question generation: {input[0]['generated_text']}"
-            st.write(generate1)
+            # Add the prefix to indicate question generation
+            prompt = f"generate question: {user_input}"
+            try:
+                # Generate the question based on the input
+                input = generator(prompt)
+                generate1 = f"Generated question: {input[0]['generated_text']}"
+                st.write(generate1)
+            except Exception as e:
+                st.error(f"An error occurred: {e}")
+                st.write("Please try again.")
 
 
 def homepage():
